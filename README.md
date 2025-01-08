@@ -1,50 +1,29 @@
-# React + TypeScript + Vite
+# Technical Assessment : Weather Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Table of Contents
 
-Currently, two official plugins are available:
+1. [Overview](#overview)
+2. [Features](#features)
+3. [Tech Stack](#tech-stack)
+4. [Setup and Installation](#setup-and-installation)
+5. [Usage](#usage)
+6. [Testing](#testing)
+7. [Performance Optimization](#performance-optimization)
+8. [Optional Enhancements](#optional-enhancements)
+9. [Deployment](#deployment)
+10. [Future Improvements](#future-improvements)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## Expanding the ESLint configuration
+This Natwest inspired weather web application provides users with real-time weather information for any city. It includes a current weather display, a 5-day forecast, and a city search functionality.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+[Figma Link](https://www.figma.com/proto/IcESFaw3pS3CKGNVjXxt9i/Untitled?node-id=4-3&t=8dmk7LGHtvJNcrbC-0&scaling=contain&content-scaling=fixed&page-id=0%3A1)
 
-- Configure the top-level `parserOptions` property like this:
+## Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Tech Stack
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- React + TypeScript
+- Meteomatics Weather API
+- Axios
+- Redux / React Redux
