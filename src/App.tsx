@@ -11,9 +11,7 @@ function App() {
     <div className="h-screen flex flex-col">
       <NavBar />
       <div className="flex-grow flex flex-col md:flex-row m-4 gap-4">
-        {/* Left Section */}
         <CurrentDaySection />
-        {/* Right Section */}
         <div className="flex flex-col flex-1 gap-4">
           <div className="md:flex-[1.5]">
             <WeeklyForecast />
