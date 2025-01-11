@@ -1,17 +1,15 @@
-function NavBar() {
+import { SearchCity } from "../SearchCity/SearchCity";
+
+interface NavBarProps {
+  onSearch: (city: string) => void;
+  cityName: string;
+}
+
+function NavBar({ onSearch, cityName }: NavBarProps) {
   return (
-    <nav className="bg-[#49076C] p-4 m-2 rounded-md flex items-center justify-between">
-      <div className="text-white text-3xl hidden sm:block">London</div>
-      <div className="flex flex-grow justify-center sm:justify-end">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="px-4 py-2 rounded-full border-none focus:ring-2 focus:ring-purple-300"
-        />
-        <button className="bg-purple-700 text-white px-8 ml-2 py-2 rounded-full hover:bg-purple-600">
-          Search
-        </button>
-      </div>
+    <nav className="bg-opacity-60 backdrop-filter backdrop-blur-lg shadow-2xl p-4 ml-4 mr-4 mt-7 rounded-xl flex items-center justify-between">
+      <div className="text-black text-3xl hidden sm:block">{cityName}</div>
+      <SearchCity onSearch={onSearch} />
     </nav>
   );
 }

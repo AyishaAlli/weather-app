@@ -7,9 +7,11 @@ const getCoordinates = async (city: string) => {
 
   try {
     const response = await axios.get(url);
-    if (response.data.length > 0) {
-      const { lat, lon } = response.data[0];
-      return { lat, lon };
+    if (response) {
+      const { lat, lng } = response.data.results[0].geometry.location;
+      const city_name = response.data.results[0].formatted_address;
+
+      return { lat, lng, city_name };
     } else {
       throw new Error("City not found");
     }

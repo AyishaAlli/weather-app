@@ -1,9 +1,9 @@
 export interface WeatherData {
-  location: {
-    name: string;
-    latitude: number;
-    longitude: number;
-  };
+  cityName: string;
+  temperature: number;
+  sunrise: string;
+  sunset: string;
+  icon: string;
 }
 
 export interface WeatherActionTypes {
