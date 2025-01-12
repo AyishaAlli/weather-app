@@ -15,7 +15,7 @@
 
 ## Overview
 
-This Natwest inspired weather web application provides users with real-time weather information for any city. It includes a current weather display, a 5-day forecast, and a city search functionality.
+This weather web application provides users with real-time weather information for any city. It includes a current weather display, a 6-day forecast, and city search functionality.
 
 [Figma Link](https://www.figma.com/proto/IcESFaw3pS3CKGNVjXxt9i/Untitled?node-id=4-3&t=8dmk7LGHtvJNcrbC-0&scaling=contain&content-scaling=fixed&page-id=0%3A1)
 
@@ -24,6 +24,6 @@ This Natwest inspired weather web application provides users with real-time weat
 ## Tech Stack
 
 - React + TypeScript
-- Meteomatics Weather API
 - Axios
-- Redux / React Redux
+- Meteomatics Weather API
+- Google Geocoding API

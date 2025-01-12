@@ -3,7 +3,7 @@
 import "./App.css";
 import CurrentDaySection from "./components/CurrentDaySection/CurrentDaySection";
 import { WeeklyForecast } from "./components/WeeklyForecast/WeeklyForecast";
-import { OtherCitiesWeather } from "./components/OtherCitiesWeather/OtherCitiesWeather";
+import { OtherCitiesWeather } from "./components/OtherCities/OtherCities";
 import NavBar from "./components/NavBar/NavBar";
 import { useEffect, useState } from "react";
 
