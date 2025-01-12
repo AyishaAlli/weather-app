@@ -14,10 +14,11 @@ const CurrentDaySection = ({ data }) => {
           {time}
         </div>
       </div>
-      <div className="text-8xl font-bold mt-4 self-center text-black">
+
+      <div className="text-7xl font-bold mt-4 self-center text-black">
         {data.temperature}°c
       </div>
-      <div className="self-center">ICON</div>
+
       <div className="space-y-2 mt-4 items-center">
         <div className="bg-[#49076C] text-white p-4 rounded-lg">
           Sunrise: {data.sunrise}

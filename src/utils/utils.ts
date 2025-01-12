@@ -1,5 +1,6 @@
 import fetchWeatherData from "../services/meteomatics";
 import { Coordinates, Forecast } from "../types/weather";
+import { weatherIcons } from "./weatherIcons";
 
 export const getWeatherForecast = async (coordinates: Coordinates) => {
   if (!coordinates) return null;
@@ -9,19 +10,29 @@ export const getWeatherForecast = async (coordinates: Coordinates) => {
   const endDate =
     new Date(now.setDate(now.getDate() + 6)).toISOString().split(".")[0] + "Z";
 
-  // API URL
   const url = `${startDate}--${endDate}:P1D/t_2m:C,t_2m_min_1d_sot:idx,t_2m_max_1d_sot:idx,sunrise:dn,sunset:dn,weather_symbol_1h:idx/${coordinates.lat},${coordinates.lng}/json?model=mix`;
 
   const response = await fetchWeatherData(url);
 
-  const forecastData = response.data[0].coordinates[0].dates.slice(1);
-  const sixDaysForecast: Forecast[] = forecastData.map((data) => ({
-    date: data.date,
-    temperature: data.value,
-  }));
+  // Extracting the data from the API response
+  const dates = response.data[0].coordinates[0].dates;
+  const weatherSymbolCodes = response.data[5].coordinates[0].dates;
+
+  const sixDaysForecast: Forecast[] = dates.map((data, index: number) => {
+    const weatherCode = weatherSymbolCodes[index].value;
+    const weatherIcon = weatherIcons[weatherCode];
+
+    return {
+      date: data.date,
+      temperature: data.value,
+
+      icon: weatherIcon,
+    };
+  });
 
   const sunrise = decimalToTime(response.data[3].coordinates[0].dates[0].value);
   const sunset = decimalToTime(response.data[4].coordinates[0].dates[0].value);
+  const weatherCode = response.data[5].coordinates[0].dates[0].value;
 
   return {
     cityName: coordinates.city_name,
@@ -29,7 +40,7 @@ export const getWeatherForecast = async (coordinates: Coordinates) => {
     sunrise,
     sunset,
     forecast: sixDaysForecast,
-    icon: "",
+    icon: weatherIcons[weatherCode],
   };
 };
 
