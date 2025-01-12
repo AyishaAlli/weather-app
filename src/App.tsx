@@ -20,9 +20,9 @@ function App() {
     forecast: [],
     icon: "",
     description: "",
-    humidty: 0,
-    pressure: 0,
-    visibility: 0,
+    humidity: 0,
+    pressure: "0",
+    visibility: "0",
   });
 
   const DEFAULT_CITY = "London";
