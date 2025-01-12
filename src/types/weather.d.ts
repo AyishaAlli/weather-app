@@ -6,9 +6,13 @@ export interface Forecast {
 export interface WeatherData {
   cityName: string;
   temperature: number;
+  humidty: number;
+  pressure: number;
+  visibility: number;
   sunrise: string;
   sunset: string;
   icon: string;
+  description: string;
   forecast: Forecast[];
 }
 
@@ -17,21 +21,3 @@ export interface Coordinates {
   lng: number;
   city_name: string;
 }
-
-// export interface WeatherActionTypes {
-//   GET_WEATHER: {
-//     type: "GET_WEATHER";
-//     payload: WeatherData;
-//   };
-//   SET_ERROR: {
-//     type: "SET_ERROR";
-//     payload: string | null;
-//   };
-// }
-
-// export type WeatherAction = WeatherActionTypes[keyof WeatherActionTypes];
-
-// export interface WeatherState {
-//   weatherData: WeatherData | null;
-//   error: string | null;
-// }

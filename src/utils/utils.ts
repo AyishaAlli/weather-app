@@ -2,6 +2,18 @@ import fetchWeatherData from "../services/meteomatics";
 import { Coordinates, Forecast } from "../types/weather";
 import { weatherIcons } from "./weatherIcons";
 
+const getWeatherIconByCode = (code: number) => {
+  const weatherIcon = weatherIcons.find((icon) => icon.code === code);
+  return weatherIcon
+    ? weatherIcon.image
+    : "src/assets/mm_api_symbols/wsymbol_0000_unknown.png";
+};
+
+const getWeatherDescriptionByCode = (code: number) => {
+  const weatherIcon = weatherIcons.find((icon) => icon.code === code);
+  return weatherIcon ? weatherIcon.description : "Unknown Weather Condition";
+};
+
 export const getWeatherForecast = async (coordinates: Coordinates) => {
   if (!coordinates) return null;
 
@@ -10,37 +22,38 @@ export const getWeatherForecast = async (coordinates: Coordinates) => {
   const endDate =
     new Date(now.setDate(now.getDate() + 6)).toISOString().split(".")[0] + "Z";
 
-  const url = `${startDate}--${endDate}:P1D/t_2m:C,t_2m_min_1d_sot:idx,t_2m_max_1d_sot:idx,sunrise:dn,sunset:dn,weather_symbol_1h:idx/${coordinates.lat},${coordinates.lng}/json?model=mix`;
+  const url = `${startDate}--${endDate}:P1D/t_2m:C,absolute_humidity_2m:gm3,pressure_100m:Pa,visibility:m,sunrise:dn,sunset:dn,weather_symbol_1h:idx/${coordinates.lat},${coordinates.lng}/json?model=mix`;
 
   const response = await fetchWeatherData(url);
 
   // Extracting the data from the API response
   const dates = response.data[0].coordinates[0].dates;
-  const weatherSymbolCodes = response.data[5].coordinates[0].dates;
+  const weatherSymbolCodes = response.data[6].coordinates[0].dates;
 
   const sixDaysForecast: Forecast[] = dates.map((data, index: number) => {
     const weatherCode = weatherSymbolCodes[index].value;
-    const weatherIcon = weatherIcons[weatherCode];
 
     return {
       date: data.date,
       temperature: data.value,
-
-      icon: weatherIcon,
+      icon: getWeatherIconByCode(weatherCode),
     };
   });
 
-  const sunrise = decimalToTime(response.data[3].coordinates[0].dates[0].value);
-  const sunset = decimalToTime(response.data[4].coordinates[0].dates[0].value);
-  const weatherCode = response.data[5].coordinates[0].dates[0].value;
-
+  const sunrise = decimalToTime(response.data[4].coordinates[0].dates[0].value);
+  const sunset = decimalToTime(response.data[5].coordinates[0].dates[0].value);
+  const weatherCode = response.data[6].coordinates[0].dates[0].value;
   return {
     cityName: coordinates.city_name,
     temperature: Math.ceil(response.data[0].coordinates[0].dates[0].value),
+    humidty: response.data[1].coordinates[0].dates[0].value,
+    pressure: response.data[2].coordinates[0].dates[0].value,
+    visibility: response.data[3].coordinates[0].dates[0].value,
     sunrise,
     sunset,
     forecast: sixDaysForecast,
-    icon: weatherIcons[weatherCode],
+    icon: getWeatherIconByCode(weatherCode),
+    description: getWeatherDescriptionByCode(weatherCode),
   };
 };
 

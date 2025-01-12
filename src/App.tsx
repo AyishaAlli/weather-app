@@ -19,6 +19,10 @@ function App() {
     sunset: "00:00",
     forecast: [],
     icon: "",
+    description: "",
+    humidty: 0,
+    pressure: 0,
+    visibility: 0,
   });
 
   const DEFAULT_CITY = "London";
@@ -66,6 +70,7 @@ function App() {
           <div className="md:flex-[1.5]">
             <WeeklyForecast data={weatherData.forecast} />
           </div>
+          <h2 className="text-3xl">Other Cities</h2>
           <div className="flex-1">
             <OtherCitiesWeather />
           </div>
