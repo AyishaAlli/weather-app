@@ -2,16 +2,13 @@
 
 ## Table of Contents
 
-1. [Overview](#overview)
-2. [Features](#features)
-3. [Tech Stack](#tech-stack)
-4. [Setup and Installation](#setup-and-installation)
-5. [Usage](#usage)
-6. [Testing](#testing)
-7. [Performance Optimization](#performance-optimization)
-8. [Optional Enhancements](#optional-enhancements)
-9. [Deployment](#deployment)
-10. [Future Improvements](#future-improvements)
+- [Technical Assessment : Weather Application](#technical-assessment--weather-application)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Tech Stack](#tech-stack)
+  - [Set up and installation](#set-up-and-installation)
+  - [Deployment](#deployment)
 
 ## Overview
 
@@ -26,5 +23,15 @@ This weather web application provides users with real-time weather information f
 - React + TypeScript
 - Axios
 - React Query
-- Meteomatics Weather API
-- Google Geocoding API
+- OpenWeatherAPI
+- Vitest
+
+## Set up and installation
+
+1. Create free acount on (Open Weather API)[]
+2. create an .env and add you API KEY to a variable named `VITE_OPEN_WEATHER_API_KEY `
+3. run `npm run dev`
+
+## Deployment
+
+Live Demo hosted by Netlify (Click Here)[]

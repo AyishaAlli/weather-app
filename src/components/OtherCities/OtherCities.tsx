@@ -4,7 +4,7 @@ export const OtherCitiesWeather = ({ cities }) => {
   return (
     <Card title="Other Cities">
       <div className="grid grid-cols-2 md:grid-cols-3 gap-2 ">
-        {cities.map((city, index) => {
+        {cities.map((city, index: number) => {
           return (
             <div
               key={index}
