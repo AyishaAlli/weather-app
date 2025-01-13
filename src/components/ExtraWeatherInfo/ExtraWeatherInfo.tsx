@@ -16,7 +16,7 @@ export const ExtraWeatherInfo = ({ data }) => {
           <div className="text-sm w-full h-full flex flex-col justify-center items-center">
             <p>Min Temp</p>
             <FaTemperatureArrowDown />
-            <p>{data.extraWeatherInfo.minTemp}°c</p>
+            <p className="font-extrabold">{data.extraWeatherInfo.minTemp}°c</p>
           </div>
         </div>
 
@@ -24,35 +24,41 @@ export const ExtraWeatherInfo = ({ data }) => {
           <div className="p-5 text-sm w-full h-full flex flex-col justify-center items-center">
             <p>Max Temp</p>
             <FaTemperatureArrowUp />
-            <p>{data.extraWeatherInfo.maxTemp}°c</p>
+            <p className="font-extrabold">{data.extraWeatherInfo.maxTemp}°c</p>
           </div>
         </div>
         <div>
           <div className="p-5 text-sm w-full h-full flex flex-col justify-center items-center">
             <p>Feels Like</p>
             <TbTemperature />
-            <p>{data.extraWeatherInfo.feelsLike}°c</p>
+            <p className="font-extrabold">
+              {data.extraWeatherInfo.feelsLike}°c
+            </p>
           </div>
         </div>
         <div>
           <div className="text-sm w-full h-full flex flex-col justify-center items-center">
             <p>Wind Speed</p>
             <FaWind />
-            <p>{data.extraWeatherInfo.windSpeed}m</p>
+            <p className="font-extrabold">{data.extraWeatherInfo.windSpeed}m</p>
           </div>
         </div>
         <div>
           <div className="p-5 text-sm w-full h-full flex flex-col justify-center items-center">
             <p>SeaLevel</p>
             <FaWater />
-            <p>{data.extraWeatherInfo.seaLevel}hPa</p>
+            <p className="font-extrabold">
+              {data.extraWeatherInfo.seaLevel}hPa
+            </p>
           </div>
         </div>
         <div>
           <div className="text-sm w-full h-full flex flex-col justify-center items-center">
             <p>Gound Level</p>
             <SiFlat />
-            <p>{data.extraWeatherInfo.groundLevel}hPa</p>
+            <p className="font-extrabold">
+              {data.extraWeatherInfo.groundLevel}hPa
+            </p>
           </div>
         </div>
       </div>
