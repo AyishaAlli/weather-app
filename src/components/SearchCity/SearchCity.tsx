@@ -7,21 +7,25 @@ interface SearchCityProps {
 
 export const SearchCity = ({ onSearch }: SearchCityProps) => {
   const [city, setCity] = useState("");
-  const [isFocused, setIsFocused] = useState(false); // State to track input focus
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && city.trim() !== "") {
       // Only trigger search if city is not empty
-      onSearch(city);
+      if (onSearch) {
+        onSearch(city);
+      }
       setCity("");
     }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (city.trim() !== "") {
-      onSearch(city);
-      setCity("");
+    const trimmedCity = city.trim();
+    if (trimmedCity !== "") {
+      if (trimmedCity) {
+        onSearch(trimmedCity);
+      }
     } else {
       alert("Please enter a city name.");
     }
@@ -39,7 +43,7 @@ export const SearchCity = ({ onSearch }: SearchCityProps) => {
             onKeyUp={handleKeyPress}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            className="px-4 py-2 rounded-full shadow-2xl bg-gray-200 focus:ring-2 focus:ring-purple-300 pr-10" // Add padding to right for icon
+            className="px-4 py-2 rounded-full shadow-2xl bg-gray-200 focus:ring-2 focus:ring-purple-300 pr-10"
             data-testid="city-input"
           />
 
@@ -47,7 +51,10 @@ export const SearchCity = ({ onSearch }: SearchCityProps) => {
             <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           )}
         </div>
-        <button className=" bg-[#49076C] text-white px-8 ml-2 py-2 rounded-full hover:bg-purple-800">
+        <button
+          type="submit"
+          className=" bg-[#49076C] text-white px-8 ml-2 py-2 rounded-full hover:bg-purple-800"
+        >
           Search
         </button>
       </form>

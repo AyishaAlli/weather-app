@@ -9,7 +9,7 @@ const CurrentDaySection = ({ data }) => {
   });
 
   const weatherInfo = [
-    { label: "Pressure", value: `${data.pressure} mb` },
+    { label: "Pressure", value: `${data.pressure} hPa` },
     { label: "Humidity", value: `${data.humidity}%` },
     { label: "Visibility", value: `${data.visibility} km` },
   ];
@@ -18,7 +18,7 @@ const CurrentDaySection = ({ data }) => {
     <div className="bg-white p-5 rounded-2xl flex flex-col justify-between bg-opacity-60 backdrop-filter backdrop-blur-lg shadow-2xl">
       <div className="flex justify-between items-center">
         <div className="text-left opacity-70 bg-[#49076C] text-white rounded-full text-xl px-4 py-1 mb-4 block md:opacity-0">
-          {data.cityName}
+          {data.name}
         </div>
         <div className="text-center  text-black px-4 py-1  mb-4 md:w-20 md:text-white md:bg-[#49076C] rounded-full">
           {time}

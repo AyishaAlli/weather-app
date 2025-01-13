@@ -25,5 +25,6 @@ This weather web application provides users with real-time weather information f
 
 - React + TypeScript
 - Axios
+- React Query
 - Meteomatics Weather API
 - Google Geocoding API

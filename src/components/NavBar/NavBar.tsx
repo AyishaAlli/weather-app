@@ -2,7 +2,7 @@ import { SearchCity } from "../SearchCity/SearchCity";
 
 interface NavBarProps {
   onSearch: (city: string) => void;
-  cityName: string;
+  cityName: string | null;
 }
 
 function NavBar({ onSearch, cityName }: NavBarProps) {

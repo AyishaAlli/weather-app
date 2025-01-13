@@ -11,14 +11,23 @@ export interface Coordinates {
 }
 
 export interface WeatherData {
-  cityName: string;
-  temperature: number;
-  humidity: number;
-  pressure: string;
-  visibility: string;
-  sunrise: string;
-  sunset: string;
-  icon: string;
-  description: string;
-  forecast: Forecast[];
+  currentData: {
+    name: string;
+    sunrise: number;
+    sunset: number;
+    temprature: number;
+    minTemp: number;
+    maxTemp: number;
+    description: string;
+    icon: string;
+    humidity: number;
+    pressure: number;
+    visibility: number;
+  };
+  forecastData: Forecast[];
+}
+
+export interface GeolocationData {
+  longitude: number;
+  latitude: number;
 }
