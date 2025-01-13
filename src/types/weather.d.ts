@@ -26,6 +26,17 @@ export interface WeatherData {
 
 export interface ExtraWeatherInfo {
   feelsLike: number;
+  minTemp: number;
+  maxTemp: number;
+  feelsLike: number;
+  windSpeed: number;
+  groundLevel: number | "N/A";
+  seaLevel: number | "N/A";
+}
+
+export interface WeatherIconData {
+  code: string;
+  image: string;
 }
 
 export interface GeolocationData {

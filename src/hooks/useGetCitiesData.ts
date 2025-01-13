@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getCitiesData } from "../services/openWeatherAPI";
+import { getCitiesData } from "../services/api";
 
 export function useGetWeatherData() {
   const { data, error, isLoading } = useQuery({

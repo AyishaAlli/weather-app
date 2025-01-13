@@ -1,10 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { GeolocationData } from "../types/weather";
-import {
-  getWeatherDataByCoords,
-  getWeatherDataByCity,
-} from "../services/openWeatherAPI";
+import { getWeatherDataByCoords, getWeatherDataByCity } from "../services/api";
 
 export function useGetWeatherData(
   geoData: GeolocationData,

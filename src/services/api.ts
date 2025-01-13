@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Forecast, GeolocationData } from "../types/weather";
-import { convertTimestampToTime } from "../utils/utils";
+import { convertTimestampToTime, getWeatherIconByCode } from "../utils/utils";
 import { mockWeatherData } from "../mocks/mockData";
 import { weatherIcons } from "../utils/weatherIcons";
 
@@ -54,11 +54,6 @@ export const getWeatherDataByCoords = async (geoData: GeolocationData) => {
       currentData?.sys?.country ?? "Unknown Country"
     }`;
 
-    const iconCode = weatherIcons.find(
-      (icon) => icon.code === currentData.weather[0].icon
-    );
-    const icon = iconCode?.image;
-
     return {
       currentData: {
         name,
@@ -66,7 +61,7 @@ export const getWeatherDataByCoords = async (geoData: GeolocationData) => {
         sunset,
         temperature: Math.ceil(currentData.main.temp),
         description: currentData.weather[0].description,
-        icon,
+        icon: getWeatherIconByCode(currentData.weather[0].icon),
         pressure: currentData.main.pressure,
         humidity: currentData.main.humidity,
         visibility: currentData.visibility,
@@ -129,8 +124,6 @@ export const getWeatherDataByCity = async (searchQuery: string) => {
       currentData?.sys?.country ?? "Unknown Country"
     }`;
 
-    console.log(currentData.weather[0].icon);
-
     return {
       currentData: {
         name,
@@ -138,7 +131,7 @@ export const getWeatherDataByCity = async (searchQuery: string) => {
         sunset,
         temperature: Math.ceil(currentData.main.temp),
         description: currentData.weather[0].description,
-        icon: currentData.weather[0].icon,
+        icon: getWeatherIconByCode(currentData.weather[0].icon),
         pressure: currentData.main.pressure,
         humidity: currentData.main.humidity,
         visibility: currentData.visibility,
