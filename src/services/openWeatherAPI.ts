@@ -2,6 +2,7 @@ import axios from "axios";
 import { Forecast, GeolocationData } from "../types/weather";
 import { convertTimestampToTime } from "../utils/utils";
 import { mockWeatherData } from "../mocks/mockData";
+import { weatherIcons } from "../utils/weatherIcons";
 
 const BASE_URL = "https://api.openweathermap.org/data/2.5/";
 const CURRENT_WEATHER_URL = `${BASE_URL}/weather`;
@@ -11,7 +12,7 @@ const API_KEY = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
 
 const isDevMode = import.meta.env.VITE_APP_USE_MOCK_DATA === "true";
 
-export const fetchWeatherDataByCoords = async (geoData: GeolocationData) => {
+export const getWeatherDataByCoords = async (geoData: GeolocationData) => {
   if (!geoData?.latitude || !geoData?.longitude) {
     console.warn("Invalid geolocation data provided.");
     return {};
@@ -36,18 +37,27 @@ export const fetchWeatherDataByCoords = async (geoData: GeolocationData) => {
     const fiveDayForecast: Forecast[] = forecastData.list
       .slice(0, 5)
       .map((data, index: number) => {
+        const iconCode = weatherIcons[index];
+        const icon = iconCode.image;
+
         return {
           date: data.dt,
           temperature: Math.ceil(data.main.temp),
-          icon: "",
+          icon,
         };
       });
 
     const sunrise = convertTimestampToTime(currentData.sys.sunrise);
     const sunset = convertTimestampToTime(currentData.sys.sunset);
+
     const name = `${currentData?.name ?? "Unknown City"}, ${
       currentData?.sys?.country ?? "Unknown Country"
     }`;
+
+    const iconCode = weatherIcons.find(
+      (icon) => icon.code === currentData.weather[0].icon
+    );
+    const icon = iconCode?.image;
 
     return {
       currentData: {
@@ -55,13 +65,19 @@ export const fetchWeatherDataByCoords = async (geoData: GeolocationData) => {
         sunrise,
         sunset,
         temperature: Math.ceil(currentData.main.temp),
-        minTemp: Math.ceil(currentData.main.temp_min),
-        maxTemp: Math.ceil(currentData.main.temp_max),
         description: currentData.weather[0].description,
-        icon: currentData.weather[0].icon,
+        icon,
         pressure: currentData.main.pressure,
         humidity: currentData.main.humidity,
         visibility: currentData.visibility,
+        extraWeatherInfo: {
+          minTemp: Math.ceil(currentData.main.temp_min),
+          maxTemp: Math.ceil(currentData.main.temp_max),
+          feelsLike: currentData.main.feels_like,
+          windSpeed: currentData.wind.speed,
+          groundLevel: currentData.main.grnd_level || "N/A",
+          seaLevel: currentData.main.sea_level || "N/A",
+        },
       },
       forecastData: fiveDayForecast,
     };
@@ -71,7 +87,7 @@ export const fetchWeatherDataByCoords = async (geoData: GeolocationData) => {
   }
 };
 
-export const fetchWeatherDataByCity = async (searchQuery: string) => {
+export const getWeatherDataByCity = async (searchQuery: string) => {
   if (!searchQuery) {
     console.warn("Invalid city name provided.");
     return {};
@@ -97,10 +113,13 @@ export const fetchWeatherDataByCity = async (searchQuery: string) => {
     const fiveDayForecast: Forecast[] = forecastData.list
       .slice(0, 5)
       .map((data, index: number) => {
+        const iconCode = weatherIcons[index];
+        const icon = iconCode.image;
+
         return {
           date: data.dt,
           temperature: Math.ceil(data.main.temp),
-          icon: "",
+          icon,
         };
       });
 
@@ -110,24 +129,62 @@ export const fetchWeatherDataByCity = async (searchQuery: string) => {
       currentData?.sys?.country ?? "Unknown Country"
     }`;
 
+    console.log(currentData.weather[0].icon);
+
     return {
       currentData: {
         name,
         sunrise,
         sunset,
         temperature: Math.ceil(currentData.main.temp),
-        minTemp: Math.ceil(currentData.main.temp_min),
-        maxTemp: Math.ceil(currentData.main.temp_max),
         description: currentData.weather[0].description,
         icon: currentData.weather[0].icon,
         pressure: currentData.main.pressure,
         humidity: currentData.main.humidity,
         visibility: currentData.visibility,
+        extraWeatherInfo: {
+          minTemp: Math.ceil(currentData.main.temp_min),
+          maxTemp: Math.ceil(currentData.main.temp_max),
+          feelsLike: currentData.main.feels_like,
+          windSpeed: currentData.wind.speed,
+          groundLevel: currentData.main.grnd_level,
+          seaLevel: currentData.main.sea_level,
+        },
       },
       forecastData: fiveDayForecast,
     };
   } catch (error) {
     console.error("Error fetching weather data:", error);
     throw error;
+  }
+};
+
+export const getCitiesData = async () => {
+  const cityNames = [
+    "Glasgow",
+    "Manchester",
+    "Sheffield",
+    "Luton",
+    "Milton Keynes",
+    "Kent",
+  ];
+
+  try {
+    const cityDataPromises = cityNames.map((city) =>
+      axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+      )
+    );
+    const cityDataResponses = await Promise.all(cityDataPromises);
+
+    const cityData = cityDataResponses.map((response) => ({
+      name: response.data.name,
+      temperature: Math.ceil(response.data.main.temp),
+      description: response.data.weather[0].description,
+    }));
+
+    return cityData;
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
   }
 };

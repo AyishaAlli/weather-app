@@ -4,7 +4,7 @@ export interface Forecast {
   icon: string;
 }
 
-interface CurrentWeather {
+export interface CurrentWeather {
   name: string;
   sunrise: string;
   sunset: string;
@@ -16,11 +16,16 @@ interface CurrentWeather {
   pressure: number;
   humidity: number;
   visibility: number;
+  ExtraWeatherInfo: ExtraWeatherInfo;
 }
 
-interface WeatherData {
+export interface WeatherData {
   currentData: CurrentWeather;
   forecastData: Forecast[];
+}
+
+export interface ExtraWeatherInfo {
+  feelsLike: number;
 }
 
 export interface GeolocationData {

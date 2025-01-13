@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { GeolocationData } from "../types/weather";
 import {
-  fetchWeatherDataByCoords,
-  fetchWeatherDataByCity,
+  getWeatherDataByCoords,
+  getWeatherDataByCity,
 } from "../services/openWeatherAPI";
 
 export function useGetWeatherData(
@@ -14,8 +14,8 @@ export function useGetWeatherData(
     queryKey: ["weather", searchQuery, JSON.stringify(geoData)], // Stable key for geoData as was causing too many re-renders
     queryFn: () =>
       searchQuery
-        ? fetchWeatherDataByCity(searchQuery)
-        : fetchWeatherDataByCoords(geoData),
+        ? getWeatherDataByCity(searchQuery)
+        : getWeatherDataByCoords(geoData),
     enabled: !!geoData?.latitude || !!geoData?.longitude || !!searchQuery,
     staleTime: 1000 * 60 * 10, // Data stays fresh for 10 minutes
   });

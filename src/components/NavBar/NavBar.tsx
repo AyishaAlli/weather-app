@@ -31,8 +31,8 @@ function NavBar({ onSearch, cityName, searchQueary }: NavBarProps) {
 
   return (
     <nav className="bg-opacity-60 backdrop-filter backdrop-blur-lg shadow-2xl p-4 ml-4 mr-4 mt-7 rounded-xl flex items-center justify-between">
-      <div className="text-black text-3xl hidden sm:block">{cityName}</div>
-      <div className="flex flex-grow justify-center sm:justify-end">
+      <div className="text-black text-3xl hidden md:block">{cityName}</div>
+      <div className="flex flex-grow justify-center md:justify-end">
         <form onSubmit={handleSubmit} className="flex">
           <div className="relative">
             <input
@@ -56,7 +56,7 @@ function NavBar({ onSearch, cityName, searchQueary }: NavBarProps) {
           </div>
           <button
             type="submit"
-            className="bg-[#49076C] text-white px-8 ml-2 py-2 rounded-full hover:bg-purple-800"
+            className="bg-[#49076C] text-white px-8 ml-2 rounded-full hover:bg-purple-800"
             data-testid="search-button"
           >
             Search

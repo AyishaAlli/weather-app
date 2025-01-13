@@ -6,6 +6,8 @@ import { useState } from "react";
 
 import useGeoLocation from "../../hooks/useGeoLocation";
 import useGetWeatherData from "../../hooks/useGetWeatherData";
+import { ExtraWeatherInfo } from "../../components/ExtraWeatherInfo/ExtraWeatherInfo";
+import useGetCitiesData from "../../hooks/useGetCitiesData";
 
 export const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,6 +19,8 @@ export const HomePage = () => {
     error: weatherDataError,
   } = useGetWeatherData(geoLocationData, searchQuery);
 
+  const { data: citiesData } = useGetCitiesData();
+
   const isLoading = loading || weatherDataLoading;
 
   if (isLoading) {
@@ -27,27 +31,36 @@ export const HomePage = () => {
     return <p>Error: {error?.message || weatherDataError?.message}</p>;
   }
 
+  console.log(citiesData);
+
   return (
     <>
       {weatherData?.currentData ? (
-        <div className="h-screen flex flex-col">
+        <div className="h-screen flex flex-col ">
           <NavBar
             onSearch={setSearchQuery}
             searchQueary={searchQuery}
             cityName={weatherData.currentData.name}
           />
-          <div className="flex-grow flex flex-col md:flex-row m-4 gap-4">
+
+          <div className="flex-grow flex flex-col lg:flex-row m-4 gap-4 ">
+            {/* Left Section - Current Day */}
             <CurrentDaySection data={weatherData.currentData} />
-            <div className="flex flex-col flex-1 gap-4">
-              <div className="md:flex-1">
+
+            {/* Right Section - Forecast */}
+            <div className="flex  flex-col lg:flex-[3] gap-10 min-w-0">
+              {/* Weekly Forecast */}
+              <div className=" min-w-0">
                 <WeeklyForecast data={weatherData.forecastData} />
               </div>
-              <div className="flex md:flex-1">
-                <div className="flex-1 h-full">
-                  <OtherCitiesWeather />
+
+              {/* Right Section - Other Information */}
+              <div className=" lg:flex gap-4">
+                <div className="flex-1  min-w-0">
+                  <ExtraWeatherInfo data={weatherData.currentData} />
                 </div>
-                <div className="flex-2">
-                  <OtherCitiesWeather />
+                <div className="flex-[1.5] min-w-0 ">
+                  <OtherCitiesWeather cities={citiesData} />
                 </div>
               </div>
             </div>
