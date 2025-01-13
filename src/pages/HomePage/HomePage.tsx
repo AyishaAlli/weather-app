@@ -31,12 +31,16 @@ export const HomePage = () => {
           <div className="flex-grow flex flex-col md:flex-row m-4 gap-4">
             <CurrentDaySection data={weatherData.currentData} />
             <div className="flex flex-col flex-1 gap-4">
-              <div className="md:flex-[1.5]">
+              <div className="md:flex-1">
                 <WeeklyForecast data={weatherData?.forecastData} />
               </div>
-              <h2 className="text-3xl">Other Cities</h2>
-              <div className="flex-1">
-                <OtherCitiesWeather />
+              <div className="flex md:flex-1">
+                <div className="flex-1 h-full">
+                  <OtherCitiesWeather />
+                </div>
+                <div className="flex-2">
+                  <OtherCitiesWeather />
+                </div>
               </div>
             </div>
           </div>

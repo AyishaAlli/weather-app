@@ -9,7 +9,7 @@ const FORECAST_URL = `${BASE_URL}/forecast`;
 
 const API_KEY = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
 
-const isDevMode = process.env.NODE_ENV === "development"; // Check if in development mode
+const isDevMode = import.meta.env.VITE_APP_USE_MOCK_DATA === "true"; // Check if in development mode
 
 export const fetchWeatherDataByCoords = async (geoData: GeolocationData) => {
   if (!geoData?.latitude || !geoData?.longitude) {
@@ -43,7 +43,6 @@ export const fetchWeatherDataByCoords = async (geoData: GeolocationData) => {
         };
       });
 
-    const currentWeatherDetails = currentData.weather[0] || {};
     const sunrise = convertTimestampToTime(currentData.sys.sunrise);
     const sunset = convertTimestampToTime(currentData.sys.sunset);
 
@@ -55,8 +54,8 @@ export const fetchWeatherDataByCoords = async (geoData: GeolocationData) => {
         temperature: Math.ceil(currentData.main.temp),
         minTemp: Math.ceil(currentData.main.temp_min),
         maxTemp: Math.ceil(currentData.main.temp_max),
-        description: currentWeatherDetails.description,
-        icon: currentWeatherDetails.icon,
+        description: currentData.weather[0].description,
+        icon: currentData.weather[0].icon,
         pressure: currentData.main.pressure,
         humidity: currentData.main.humidity,
         visibility: currentData.visibility,
@@ -102,7 +101,6 @@ export const fetchWeatherDataByCity = async (searchQuery: string) => {
         };
       });
 
-    const currentWeatherDetails = currentData.weather[0] || {};
     const sunrise = convertTimestampToTime(currentData.sys.sunrise);
     const sunset = convertTimestampToTime(currentData.sys.sunset);
 
@@ -114,8 +112,8 @@ export const fetchWeatherDataByCity = async (searchQuery: string) => {
         temperature: Math.ceil(currentData.main.temp),
         minTemp: Math.ceil(currentData.main.temp_min),
         maxTemp: Math.ceil(currentData.main.temp_max),
-        description: currentWeatherDetails.description,
-        icon: currentWeatherDetails.icon,
+        description: currentData.weather[0].description,
+        icon: currentData.weather[0].icon,
         pressure: currentData.main.pressure,
         humidity: currentData.main.humidity,
         visibility: currentData.visibility,
