@@ -16,7 +16,7 @@ export function useGetWeatherData(
       searchQuery
         ? fetchWeatherDataByCity(searchQuery)
         : fetchWeatherDataByCoords(geoData),
-    enabled: (!!geoData?.latitude && !!geoData?.longitude) || !!searchQuery,
+    enabled: !!geoData?.latitude || !!geoData?.longitude || !!searchQuery,
     staleTime: 1000 * 60 * 10, // Data stays fresh for 10 minutes
   });
 

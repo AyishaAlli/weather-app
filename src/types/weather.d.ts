@@ -4,26 +4,22 @@ export interface Forecast {
   icon: string;
 }
 
-export interface Coordinates {
-  lat: number;
-  lng: number;
-  city_name: string;
+interface CurrentWeather {
+  name: string;
+  sunrise: string;
+  sunset: string;
+  temperature: number;
+  minTemp: number;
+  maxTemp: number;
+  description: string;
+  icon: string;
+  pressure: number;
+  humidity: number;
+  visibility: number;
 }
 
-export interface WeatherData {
-  currentData: {
-    name: string;
-    sunrise: number;
-    sunset: number;
-    temprature: number;
-    minTemp: number;
-    maxTemp: number;
-    description: string;
-    icon: string;
-    humidity: number;
-    pressure: number;
-    visibility: number;
-  };
+interface WeatherData {
+  currentData: CurrentWeather;
   forecastData: Forecast[];
 }
 

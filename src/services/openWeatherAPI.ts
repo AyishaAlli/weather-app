@@ -9,7 +9,7 @@ const FORECAST_URL = `${BASE_URL}/forecast`;
 
 const API_KEY = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
 
-const isDevMode = import.meta.env.VITE_APP_USE_MOCK_DATA === "true"; // Check if in development mode
+const isDevMode = import.meta.env.VITE_APP_USE_MOCK_DATA === "true";
 
 export const fetchWeatherDataByCoords = async (geoData: GeolocationData) => {
   if (!geoData?.latitude || !geoData?.longitude) {
@@ -45,10 +45,13 @@ export const fetchWeatherDataByCoords = async (geoData: GeolocationData) => {
 
     const sunrise = convertTimestampToTime(currentData.sys.sunrise);
     const sunset = convertTimestampToTime(currentData.sys.sunset);
+    const name = `${currentData?.name ?? "Unknown City"}, ${
+      currentData?.sys?.country ?? "Unknown Country"
+    }`;
 
     return {
       currentData: {
-        name: currentData.name,
+        name,
         sunrise,
         sunset,
         temperature: Math.ceil(currentData.main.temp),
@@ -103,10 +106,13 @@ export const fetchWeatherDataByCity = async (searchQuery: string) => {
 
     const sunrise = convertTimestampToTime(currentData.sys.sunrise);
     const sunset = convertTimestampToTime(currentData.sys.sunset);
+    const name = `${currentData?.name ?? "Unknown City"}, ${
+      currentData?.sys?.country ?? "Unknown Country"
+    }`;
 
     return {
       currentData: {
-        name: currentData.name,
+        name,
         sunrise,
         sunset,
         temperature: Math.ceil(currentData.main.temp),

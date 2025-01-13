@@ -33,6 +33,7 @@ export default function useGeolocation() {
     };
 
     if (navigator.geolocation) {
+      setLoading(true);
       navigator.geolocation.getCurrentPosition(onSuccess, onError);
     } else {
       setLoading(false);
