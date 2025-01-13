@@ -1,4 +1,3 @@
-import { Forecast } from "../types/weather";
 import { convertTimestampToTime } from "./utils";
 import { weatherIcons } from "./weatherIcons";
 
