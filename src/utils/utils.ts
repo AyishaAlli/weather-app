@@ -2,6 +2,7 @@ import { weatherIcons } from "./weatherIcons";
 
 export const getWeatherIconByCode = (code: string) => {
   const weatherIcon = weatherIcons.find((icon) => icon.code === code);
+
   return weatherIcon
     ? weatherIcon.image
     : "src/assets/mm_api_symbols/wsymbol_0000_unknown.png";

@@ -124,6 +124,7 @@ export const getWeatherDataByCity = async (searchQuery: string) => {
       currentData?.sys?.country ?? "Unknown Country"
     }`;
 
+    //console.log(getWeatherIconByCode(currentData.weather[0].icon));
     return {
       currentData: {
         name,
