@@ -19,7 +19,7 @@ export default function useGeolocation() {
 
   useEffect(() => {
     const onSuccess = (e: GeolocationPosition) => {
-      setLoading(true);
+      setLoading(false);
       setError(null);
       setData({
         latitude: e.coords.latitude,
