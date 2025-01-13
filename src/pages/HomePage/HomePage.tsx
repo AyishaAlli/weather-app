@@ -31,8 +31,6 @@ export const HomePage = () => {
     return <p>Error: {error?.message || weatherDataError?.message}</p>;
   }
 
-  console.log(citiesData);
-
   return (
     <>
       {weatherData?.currentData ? (
