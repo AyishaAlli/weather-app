@@ -8,6 +8,8 @@ import useGeoLocation from "../../hooks/useGeoLocation";
 import useGetWeatherData from "../../hooks/useGetWeatherData";
 import { ExtraWeatherInfo } from "../../components/ExtraWeatherInfo/ExtraWeatherInfo";
 import useGetCitiesData from "../../hooks/useGetCitiesData";
+import { LoadingComponent } from "../../components/Loading/Loading";
+import ErrorComponent from "../../components/Error/Error";
 
 export const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,11 +26,13 @@ export const HomePage = () => {
   const isLoading = loading || weatherDataLoading;
 
   if (isLoading) {
-    return <p>Loading weather data...</p>;
+    return <LoadingComponent />;
   }
 
   if (error || weatherDataError) {
-    return <p>Error: {error?.message || weatherDataError?.message}</p>;
+    return (
+      <ErrorComponent message={error?.message || weatherDataError?.message} />
+    );
   }
 
   return (
