@@ -1,5 +1,5 @@
 import CurrentDaySection from "../../components/CurrentDay/CurrentDay";
-import { WeeklyForecast } from "../../components/WeeklyForecast/WeeklyForecast";
+
 import { OtherCitiesWeather } from "../../components/OtherCities/OtherCities";
 import NavBar from "../../components/NavBar/NavBar";
 import { useState } from "react";
@@ -11,6 +11,7 @@ import useGetCitiesData from "../../hooks/useGetCitiesData";
 import { LoadingComponent } from "../../components/Loading/Loading";
 import ErrorComponent from "../../components/Error/Error";
 import { Card } from "../../components/Card/Card";
+import { DailyForecast } from "../../components/DailyForecast/DailyForecast";
 
 export const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -87,7 +88,7 @@ export const HomePage = () => {
             <div className="flex  flex-col lg:flex-[3] gap-10 min-w-0">
               {/* Weekly Forecast */}
               <div className=" min-w-0">
-                <WeeklyForecast data={weatherDataToUse.forecastData} />
+                <DailyForecast data={weatherDataToUse.forecastData} />
               </div>
 
               {/* Right Section - Other Information */}
