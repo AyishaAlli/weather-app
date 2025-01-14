@@ -59,7 +59,7 @@ export default function useGeolocation(city: string | null) {
     return () => {
       setLoading(false); // Cleaning up loading state if component unmounts
     };
-  }, [city]); // Re-run effect if `city` changes
+  }, [city]);
 
   return { loading, error, data };
 }
