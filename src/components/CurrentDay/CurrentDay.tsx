@@ -28,7 +28,7 @@ const CurrentDaySection = ({ data }: { data }) => {
       <div>
         <div className="flex items-center">
           <span>
-            <img src={data.icon} width={70} />
+            <img src={data.icon} width={70} alt="temprature icon" />
           </span>
           <p className="">{data.description}</p>
         </div>
