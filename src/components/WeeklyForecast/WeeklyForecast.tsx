@@ -2,7 +2,11 @@ import { Forecast } from "../../types/weather";
 import { getDayOfTheWeek } from "../../utils/utils";
 import { Card } from "../Card/Card";
 
-export const WeeklyForecast = ({ data }) => {
+interface WeeklyForecastProps {
+  data?: Forecast[];
+}
+
+export const WeeklyForecast = ({ data }: WeeklyForecastProps) => {
   return (
     <>
       <Card>

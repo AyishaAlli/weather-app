@@ -1,5 +1,5 @@
 export interface Forecast {
-  date: number;
+  date: string;
   temperature: number;
   icon: string;
 }

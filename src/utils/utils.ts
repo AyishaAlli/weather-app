@@ -29,8 +29,8 @@ export function convertTimestampToTime(number: number | undefined): string {
   });
 }
 
-export function getDayOfTheWeek(date: number): string {
-  const day = new Date(date * 1000); // converting to milliseconds
+export function getDayOfTheWeek(date: string) {
+  const day = new Date(Number(date) * 1000); // converting to milliseconds
   const options: Intl.DateTimeFormatOptions = { weekday: "long" };
   return day.toLocaleDateString("en-GB", options);
 }
