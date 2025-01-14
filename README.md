@@ -10,7 +10,7 @@
   - [Deployment](#deployment)
   - [Testing](#testing)
     - [Vitest Unit Tests](#vitest-unit-tests)
-      - [`npm install @vitest/coverage-istanbul --save-dev`](#npm-install-vitestcoverage-istanbul---save-dev)
+      - [`npx vitest run --coverage`](#npx-vitest-run---coverage)
     - [Lighthouse Accessibility Testing Report](#lighthouse-accessibility-testing-report)
 
 ## Overview and Features
@@ -59,7 +59,7 @@ UI Test Appliction `npm run test:ui`
 
 Run Coverage Report
 
-#### `npm install @vitest/coverage-istanbul --save-dev`
+#### `npx vitest run --coverage`
 
 ### Lighthouse Accessibility Testing Report
 
