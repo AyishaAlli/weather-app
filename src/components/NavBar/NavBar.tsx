@@ -5,13 +5,13 @@ import { LoadingComponent } from "../Loading/Loading";
 interface NavBarProps {
   onSearch: (city: string) => void;
   cityName?: string;
-  searchQueary: string;
+  searchQuery: string;
   isLoading: boolean;
 }
 
-function NavBar({ onSearch, cityName, searchQueary, isLoading }: NavBarProps) {
+function NavBar({ onSearch, cityName, searchQuery, isLoading }: NavBarProps) {
   const [isFocused, setIsFocused] = useState(false);
-  const [inputValue, setInputValue] = useState(searchQueary);
+  const [inputValue, setInputValue] = useState(searchQuery || "");
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && inputValue.trim() !== "") {

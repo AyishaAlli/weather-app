@@ -62,7 +62,7 @@ export const HomePage = () => {
       <div className="h-screen flex flex-col ">
         <NavBar
           onSearch={setSearchQuery}
-          searchQueary={searchQuery}
+          searchQuery={searchQuery}
           cityName={weatherDataToUse.currentData?.name}
           isLoading={weatherDataLoading}
         />
