@@ -35,7 +35,7 @@ export const getWeatherDataByCoords = async (geoData: GeolocationData) => {
     const { data: forecastData } = forecast;
 
     const dailyForecast: Forecast[] = forecastData.list
-      .filter((index) => index % 8 === 0) // Filter for one point per day
+      .filter((_, index) => index % 8 === 0) // Filter for one point per day (8 values in a day)
       .map((data, index: number) => {
         const iconCode = weatherIcons[index];
         const icon = iconCode.image;
@@ -106,7 +106,7 @@ export const getWeatherDataByCity = async (searchQuery: string) => {
     const { data: forecastData } = forecast;
 
     const dailyForecast: Forecast[] = forecastData.list
-      .filter((index) => index % 8 === 0) // Filter for one point per day
+      .filter((_, index) => index % 8 === 0) // Filter for one point per day (8 values in a day)
       .map((data, index: number) => {
         const iconCode = weatherIcons[index];
         const icon = iconCode.image;
