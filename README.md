@@ -16,8 +16,9 @@
 ## Overview and Features
 
 This weather web application provides users with real-time weather information for any city. It includes a current weather display, a 5-day forecast, and city search functionality.
-• 5-Day Weather Forecast for your current Location
-• View Weather for Other Cities
+
+- 5-Day Weather Forecast for your current Location
+- View Weather for Other Cities
 
 ![webpage screenshot](src/images/web.png)
 ![webpage screenshot](src/images/mobile.png)
