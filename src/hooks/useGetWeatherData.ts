@@ -8,13 +8,13 @@ export function useGetWeatherData(
   searchQuery: string
 ) {
   const { data, error, isLoading } = useQuery({
-    queryKey: ["weather", searchQuery, JSON.stringify(geoData)], // Stable key for geoData as was causing too many re-renders
+    queryKey: ["weather", searchQuery, geoData.latitude, geoData.longitude],
     queryFn: () =>
       searchQuery
         ? getWeatherDataByCity(searchQuery)
         : getWeatherDataByCoords(geoData),
-    enabled: !!geoData?.latitude || !!geoData?.longitude || !!searchQuery,
-    staleTime: 1000 * 60 * 10, // Data stays fresh for 10 minutes
+    enabled: (!!geoData?.latitude && !!geoData?.longitude) || !!searchQuery,
+    staleTime: 1000 * 60 * 60, // Data stays fresh for 60 minutes
   });
 
   return { data, error, isLoading };

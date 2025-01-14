@@ -1,14 +1,15 @@
-# Technical Assessment : Weather Application
+# Weather Application
 
 ## Table of Contents
 
-- [Technical Assessment : Weather Application](#technical-assessment--weather-application)
+- [Weather Application](#weather-application)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Features](#features)
   - [Tech Stack](#tech-stack)
   - [Set up and installation](#set-up-and-installation)
   - [Deployment](#deployment)
+  - [Testing](#testing)
 
 ## Overview
 
@@ -23,15 +24,32 @@ This weather web application provides users with real-time weather information f
 - React + TypeScript
 - Axios
 - React Query
-- OpenWeatherAPI
+- Tailwind CSS
 - Vitest
 
 ## Set up and installation
 
-1. Create free acount on (Open Weather API)[]
-2. create an .env and add you API KEY to a variable named `VITE_OPEN_WEATHER_API_KEY `
-3. run `npm run dev`
+To run this application locally, you'll need to have Node.js and npm istalled.
+
+1. Create free acount on [Open Weather API](https://openweathermap.org/)
+2. create an .env and add you API KEY to a variable named `VITE_OPEN_WEATHER_API_KEY`
+3. run `npm install`
+4. run `npm run dev`
+
+Running with mock data
+
+1. add `VITE_APP_USE_MOCK_DATA='true'` to .env
 
 ## Deployment
 
-Live Demo hosted by Netlify (Click Here)[]
+Live Demo hosted by Netlify [Click Here](https://ayishas-weather-app-demo.netlify.app/)
+
+## Testing
+
+Vitest Unit Tests - Coverage
+
+Running vitest
+console `npm run test`
+UI Test Appliction `npm run test:ui `
+
+Lighthouse Accessibility Testing Report

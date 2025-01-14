@@ -5,7 +5,7 @@ export const getWeatherIconByCode = (code: string) => {
 
   return weatherIcon
     ? weatherIcon.image
-    : "src/assets/mm_api_symbols/wsymbol_0000_unknown.png";
+    : "public/assets/mm_api_symbols/wsymbol_0000_unknown.png";
 };
 
 export function decimalToTime(decimal: number | undefined): string {
@@ -29,9 +29,8 @@ export function convertTimestampToTime(number: number | undefined): string {
   });
 }
 
-export function getDayOfTheWeek(date: string) {
-  const day = new Date(date);
-  // explicitly defines the type for the options object
+export function getDayOfTheWeek(date: number): string {
+  const day = new Date(date * 1000); // converting to milliseconds
   const options: Intl.DateTimeFormatOptions = { weekday: "long" };
-  return day.toLocaleString("en-GB", options);
+  return day.toLocaleDateString("en-GB", options);
 }

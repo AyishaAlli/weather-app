@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { LoadingComponent } from "../Loading/Loading";
 
 interface NavBarProps {
   onSearch: (city: string) => void;
-  cityName: string;
+  cityName?: string;
   searchQueary: string;
+  isLoading: boolean;
 }
 
-function NavBar({ onSearch, cityName, searchQueary }: NavBarProps) {
+function NavBar({ onSearch, cityName, searchQueary, isLoading }: NavBarProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState(searchQueary);
 
@@ -47,11 +49,16 @@ function NavBar({ onSearch, cityName, searchQueary }: NavBarProps) {
               data-testid="city-input"
             />
 
-            {!isFocused && (
+            {!isFocused && !isLoading && (
               <FaSearch
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                 data-testid="search-icon"
               />
+            )}
+            {isLoading && (
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <LoadingComponent loaderType="small" />
+              </div>
             )}
           </div>
           <button

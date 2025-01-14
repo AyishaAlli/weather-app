@@ -24,7 +24,7 @@ export const getWeatherDataByCoords = async (geoData: GeolocationData) => {
     }
 
     const currentWeatherURL = `${CURRENT_WEATHER_URL}/?lat=${geoData.latitude}&lon=${geoData.longitude}&appid=${API_KEY}&units=metric`;
-    const forecastWeatherURL = `${FORECAST_URL}/?lat=${geoData.latitude}&lon=${geoData.longitude}&appid=${API_KEY}&units=metric`;
+    const forecastWeatherURL = `${FORECAST_URL}?lat=${geoData.latitude}&lon=${geoData.longitude}&appid=${API_KEY}&units=metric`;
 
     const [current, forecast] = await Promise.all([
       axios.get(currentWeatherURL),
@@ -34,8 +34,8 @@ export const getWeatherDataByCoords = async (geoData: GeolocationData) => {
     const { data: currentData } = current;
     const { data: forecastData } = forecast;
 
-    const fiveDayForecast: Forecast[] = forecastData.list
-      .slice(0, 5)
+    const dailyForecast: Forecast[] = forecastData.list
+      .filter((data, index) => index % 8 === 0) // Filter for one point per day
       .map((data, index: number) => {
         const iconCode = weatherIcons[index];
         const icon = iconCode.image;
@@ -74,7 +74,7 @@ export const getWeatherDataByCoords = async (geoData: GeolocationData) => {
           seaLevel: currentData.main.sea_level || "N/A",
         },
       },
-      forecastData: fiveDayForecast,
+      forecastData: dailyForecast,
     };
   } catch (error) {
     console.error("Error fetching weather data:", error);
@@ -106,7 +106,7 @@ export const getWeatherDataByCity = async (searchQuery: string) => {
     const { data: forecastData } = forecast;
 
     const fiveDayForecast: Forecast[] = forecastData.list
-      .slice(0, 5)
+      .slice(1, 6)
       .map((data, index: number) => {
         const iconCode = weatherIcons[index];
         const icon = iconCode.image;
@@ -124,7 +124,6 @@ export const getWeatherDataByCity = async (searchQuery: string) => {
       currentData?.sys?.country ?? "Unknown Country"
     }`;
 
-    //console.log(getWeatherIconByCode(currentData.weather[0].icon));
     return {
       currentData: {
         name,

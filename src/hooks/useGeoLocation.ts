@@ -29,7 +29,18 @@ export default function useGeolocation() {
 
     const onError = (e: GeolocationPositionError) => {
       setLoading(false);
-      setError({ message: e.message });
+
+      setLoading(false);
+      if (e.code === e.PERMISSION_DENIED) {
+        setError({
+          message:
+            "Geolocation permission denied. Please allow location access or type a city.",
+        });
+      } else {
+        setError({
+          message: "An error occurred while trying to access your location.",
+        });
+      }
     };
 
     if (navigator.geolocation) {
@@ -37,11 +48,12 @@ export default function useGeolocation() {
       navigator.geolocation.getCurrentPosition(onSuccess, onError);
     } else {
       setLoading(false);
+
       setError({ message: "Geolocation is not supported by this browser." });
     }
 
     return () => {
-      setLoading(false); // Clean up loading state if component unmounts
+      setLoading(false); // Cleaning up loading state if component unmounts
     };
   }, []);
 
