@@ -35,7 +35,7 @@ export const getWeatherDataByCoords = async (geoData: GeolocationData) => {
     const { data: forecastData } = forecast;
 
     const dailyForecast: Forecast[] = forecastData.list
-      .filter((data, index) => index % 8 === 0) // Filter for one point per day
+      .filter((index) => index % 8 === 0) // Filter for one point per day
       .map((data, index: number) => {
         const iconCode = weatherIcons[index];
         const icon = iconCode.image;
@@ -105,8 +105,8 @@ export const getWeatherDataByCity = async (searchQuery: string) => {
     const { data: currentData } = current;
     const { data: forecastData } = forecast;
 
-    const fiveDayForecast: Forecast[] = forecastData.list
-      .slice(1, 6)
+    const dailyForecast: Forecast[] = forecastData.list
+      .filter((index) => index % 8 === 0) // Filter for one point per day
       .map((data, index: number) => {
         const iconCode = weatherIcons[index];
         const icon = iconCode.image;
@@ -144,7 +144,7 @@ export const getWeatherDataByCity = async (searchQuery: string) => {
           seaLevel: currentData.main.sea_level,
         },
       },
-      forecastData: fiveDayForecast,
+      forecastData: dailyForecast,
     };
   } catch (error) {
     console.error("Error fetching weather data:", error);

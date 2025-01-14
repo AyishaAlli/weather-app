@@ -11,6 +11,7 @@ describe("NavBar", () => {
         onSearch={mockOnSearch}
         cityName="London"
         {...props}
+        isLoading={false}
       />
     );
     return mockOnSearch;
