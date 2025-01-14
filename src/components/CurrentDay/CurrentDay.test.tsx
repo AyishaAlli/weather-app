@@ -20,7 +20,7 @@ describe("CurrentDay Component", () => {
     return render(<CurrentDaySection data={mockData} />);
   };
 
-  it("renders location name", () => {
+  it("renders correctly", () => {
     renderComponent();
     expect(screen.getByText(mockData.name)).toBeDefined();
   });

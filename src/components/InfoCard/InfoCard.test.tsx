@@ -13,7 +13,7 @@ describe("InfoCard Component", () => {
     render(<InfoCard {...mockProps} />);
   };
 
-  it("renders the component correctly", () => {
+  it("renders correctly", () => {
     renderComponent();
     expect(screen.getByText(mockProps.title)).toBeDefined();
     expect(screen.getByText(mockProps.time)).toBeDefined();

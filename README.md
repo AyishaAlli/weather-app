@@ -9,7 +9,8 @@
   - [Set up and installation](#set-up-and-installation)
   - [Deployment](#deployment)
   - [Testing](#testing)
-    - [Vitest Unit Tests - Coverage](#vitest-unit-tests---coverage)
+    - [Vitest Unit Tests](#vitest-unit-tests)
+      - [`npm install @vitest/coverage-istanbul --save-dev`](#npm-install-vitestcoverage-istanbul---save-dev)
     - [Lighthouse Accessibility Testing Report](#lighthouse-accessibility-testing-report)
 
 ## Overview and Features
@@ -50,11 +51,15 @@ Live Demo hosted by Netlify [Click Here](https://ayishas-weather-app-demo.netlif
 
 ## Testing
 
-### Vitest Unit Tests - Coverage
+### Vitest Unit Tests
 
 Running vitest
 console `npm run test`
 UI Test Appliction `npm run test:ui`
+
+Run Coverage Report
+
+#### `npm install @vitest/coverage-istanbul --save-dev`
 
 ### Lighthouse Accessibility Testing Report
 
