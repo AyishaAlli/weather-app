@@ -10,7 +10,7 @@
   - [Deployment](#deployment)
   - [Testing](#testing)
     - [Vitest Unit Tests](#vitest-unit-tests)
-      - [`npx vitest run --coverage`](#npx-vitest-run---coverage)
+    - [Run Coverage Report](#run-coverage-report)
     - [Lighthouse Accessibility Testing Report](#lighthouse-accessibility-testing-report)
 
 ## Overview and Features
@@ -57,9 +57,9 @@ Running vitest
 console `npm run test`
 UI Test Appliction `npm run test:ui`
 
-Run Coverage Report
+### Run Coverage Report
 
-#### `npx vitest run --coverage`
+`npx vitest run --coverage`
 
 ### Lighthouse Accessibility Testing Report
 
