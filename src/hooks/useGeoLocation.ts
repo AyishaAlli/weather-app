@@ -9,7 +9,7 @@ interface GeolocationError {
   message: string;
 }
 
-export default function useGeolocation() {
+export default function useGeolocation(city: string | null) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<GeolocationError | null>(null);
   const [data, setData] = useState<GeolocationData>({
@@ -18,6 +18,13 @@ export default function useGeolocation() {
   });
 
   useEffect(() => {
+    if (city) {
+      // If a city is provided, reset the error state
+      setError(null);
+      setLoading(false);
+      return; // Skip geolocation logic if city is provided
+    }
+
     const onSuccess = (e: GeolocationPosition) => {
       setLoading(false);
       setError(null);
@@ -28,8 +35,6 @@ export default function useGeolocation() {
     };
 
     const onError = (e: GeolocationPositionError) => {
-      setLoading(false);
-
       setLoading(false);
       if (e.code === e.PERMISSION_DENIED) {
         setError({
@@ -48,14 +53,13 @@ export default function useGeolocation() {
       navigator.geolocation.getCurrentPosition(onSuccess, onError);
     } else {
       setLoading(false);
-
       setError({ message: "Geolocation is not supported by this browser." });
     }
 
     return () => {
       setLoading(false); // Cleaning up loading state if component unmounts
     };
-  }, []);
+  }, [city]); // Re-run effect if `city` changes
 
   return { loading, error, data };
 }

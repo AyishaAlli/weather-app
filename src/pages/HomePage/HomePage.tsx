@@ -15,7 +15,7 @@ import { Card } from "../../components/Card/Card";
 export const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { data: geoLocationData, loading, error } = useGeoLocation();
+  const { data: geoLocationData, loading, error } = useGeoLocation(searchQuery);
   const {
     data: weatherData,
     isLoading: weatherDataLoading,
